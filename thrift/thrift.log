@@ -1,0 +1,159 @@
+'connection', 'close'
+
+2021-07-27T09:47:31.746454Z	debug	envoy connection	[C852] closing data_to_write=143 type=2
+2021-07-27T09:47:31.746465Z	debug	envoy connection	[C852] setting delayed close timer with timeout 1000 ms
+2021-07-27T09:47:31.746474Z	debug	envoy pool	[C7] response complete
+2021-07-27T09:47:31.746479Z	debug	envoy pool	[C7] destroying stream: 0 remaining
+2021-07-27T09:47:31.746623Z	debug	envoy connection	[C852] write flush complete
+2021-07-27T09:47:31.746866Z	debug	envoy connection	[C852] remote early close
+2021-07-27T09:47:31.746885Z	debug	envoy connection	[C852] closing socket: 0
+2021-07-27T09:47:31.746978Z	debug	envoy conn_handler	[C852] adding to cleanup list
+2021-07-27T09:47:33.335212Z	debug	envoy main	flushing stats
+2021-07-27T09:47:33.746264Z	debug	envoy conn_handler	[C853] new connection
+2021-07-27T09:47:33.747315Z	debug	envoy http	[C853] new stream
+2021-07-27T09:47:33.747485Z	debug	envoy http	[C853][S12480348055293442913] request headers complete (end_stream=true):
+':authority', '10.39.0.2:15021'
+':path', '/healthz/ready'
+':method', 'GET'
+'user-agent', 'kube-probe/1.21'
+'accept', '*/*'
+'connection', 'close'
+
+2021-07-27T09:47:33.747503Z	debug	envoy http	[C853][S12480348055293442913] request end stream
+2021-07-27T09:47:33.747574Z	debug	envoy router	[C853][S12480348055293442913] cluster 'agent' match for URL '/healthz/ready'
+2021-07-27T09:47:33.747647Z	debug	envoy router	[C853][S12480348055293442913] router decoding headers:
+':authority', '10.39.0.2:15021'
+':path', '/healthz/ready'
+':method', 'GET'
+':scheme', 'http'
+'user-agent', 'kube-probe/1.21'
+'accept', '*/*'
+'x-forwarded-proto', 'http'
+'x-request-id', '562485f9-345e-4780-8e6f-ac20ab06bdc0'
+'x-envoy-expected-rq-timeout-ms', '15000'
+
+2021-07-27T09:47:33.747671Z	debug	envoy pool	[C3] using existing connection
+2021-07-27T09:47:33.747681Z	debug	envoy pool	[C3] creating stream
+2021-07-27T09:47:33.747699Z	debug	envoy router	[C853][S12480348055293442913] pool ready
+2021-07-27T09:47:33.750136Z	debug	envoy client	[C3] response complete
+2021-07-27T09:47:33.750192Z	debug	envoy router	[C853][S12480348055293442913] upstream headers complete: end_stream=true
+2021-07-27T09:47:33.750266Z	debug	envoy http	[C853][S12480348055293442913] closing connection due to connection close header
+2021-07-27T09:47:33.750291Z	debug	envoy http	[C853][S12480348055293442913] encoding headers via codec (end_stream=true):
+':status', '200'
+'date', 'Tue, 27 Jul 2021 09:47:33 GMT'
+'content-length', '0'
+'x-envoy-upstream-service-time', '2'
+'server', 'envoy'
+'connection', 'close'
+
+2021-07-27T09:47:33.750346Z	debug	envoy connection	[C853] closing data_to_write=143 type=2
+2021-07-27T09:47:33.750377Z	debug	envoy connection	[C853] setting delayed close timer with timeout 1000 ms
+2021-07-27T09:47:33.750395Z	debug	envoy pool	[C3] response complete
+2021-07-27T09:47:33.750406Z	debug	envoy pool	[C3] destroying stream: 0 remaining
+2021-07-27T09:47:33.750552Z	debug	envoy connection	[C853] write flush complete
+2021-07-27T09:47:33.750821Z	debug	envoy connection	[C853] remote early close
+2021-07-27T09:47:33.751076Z	debug	envoy connection	[C853] closing socket: 0
+2021-07-27T09:47:33.751397Z	debug	envoy conn_handler	[C853] adding to cleanup list
+2021-07-27T09:47:34.961911Z	debug	envoy upstream	membership update for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local added 0 removed 1
+2021-07-27T09:47:34.961951Z	debug	envoy upstream	re-creating local LB for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local
+2021-07-27T09:47:34.961966Z	debug	envoy upstream	removing hosts for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local removed 1
+2021-07-27T09:47:34.961993Z	debug	envoy upstream	membership update for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local added 0 removed 1
+2021-07-27T09:47:34.962000Z	debug	envoy upstream	re-creating local LB for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local
+2021-07-27T09:47:34.962005Z	debug	envoy upstream	removing hosts for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local removed 1
+2021-07-27T09:47:34.962024Z	debug	envoy upstream	membership update for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local added 0 removed 1
+2021-07-27T09:47:34.962034Z	debug	envoy upstream	re-creating local LB for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local
+2021-07-27T09:47:34.962042Z	debug	envoy upstream	removing hosts for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local removed 1
+2021-07-27T09:47:34.962052Z	debug	envoy connection	[C849] closing data_to_write=0 type=1
+2021-07-27T09:47:34.962056Z	debug	envoy connection	[C849] closing socket: 1
+2021-07-27T09:47:34.964802Z	debug	envoy connection	[C849] SSL shutdown: rc=0
+2021-07-27T09:47:34.965212Z	debug	envoy pool	[C849] client disconnected
+2021-07-27T09:47:34.965421Z	debug	envoy pool	[C849] connection destroyed
+2021-07-27T09:47:35.128221Z	debug	envoy filter	original_dst: New connection accepted
+2021-07-27T09:47:35.128343Z	debug	envoy conn_handler	[C854] new connection
+2021-07-27T09:47:35.128421Z	debug	envoy thrift	thrift: 74 bytes available
+2021-07-27T09:47:35.128437Z	debug	envoy thrift	thrift: unframed(auto) transport started
+2021-07-27T09:47:35.128495Z	debug	envoy thrift	thrift: protocol auto, state MessageBegin, 74 bytes available
+2021-07-27T09:47:35.128513Z	debug	envoy thrift	[C854][S12916967057264934075] cluster 'outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local' match for method 'SayHello'
+2021-07-27T09:47:35.128538Z	debug	envoy upstream	transport socket match, socket default selected for host with address 10.36.0.5:9999
+2021-07-27T09:47:35.128544Z	debug	envoy upstream	Created host 10.36.0.5:9999.
+2021-07-27T09:47:35.128573Z	debug	envoy thrift	[C854][S12916967057264934075] router decoding request
+2021-07-27T09:47:35.128583Z	debug	envoy pool	creating a new connection
+2021-07-27T09:47:35.128644Z	debug	envoy pool	[C855] connecting
+2021-07-27T09:47:35.128651Z	debug	envoy connection	[C855] connecting to 10.36.0.5:9999
+2021-07-27T09:47:35.128796Z	debug	envoy connection	[C855] connection in progress
+2021-07-27T09:47:35.128812Z	debug	envoy pool	queueing request due to no available connections
+2021-07-27T09:47:35.128818Z	debug	envoy thrift	thrift: wait for continuation
+2021-07-27T09:47:35.128953Z	debug	envoy upstream	addHost() adding 10.36.0.5:9999
+2021-07-27T09:47:35.129073Z	debug	envoy upstream	membership update for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local added 1 removed 0
+2021-07-27T09:47:35.129087Z	debug	envoy upstream	re-creating local LB for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local
+2021-07-27T09:47:35.129129Z	debug	envoy upstream	membership update for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local added 1 removed 0
+2021-07-27T09:47:35.129169Z	debug	envoy upstream	re-creating local LB for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local
+2021-07-27T09:47:35.129445Z	debug	envoy upstream	membership update for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local added 1 removed 0
+2021-07-27T09:47:35.129474Z	debug	envoy upstream	re-creating local LB for TLS cluster outbound|9999||thrift-demo-server-headless.thrift-demo.svc.cluster.local
+2021-07-27T09:47:35.129502Z	debug	envoy connection	[C855] connected
+2021-07-27T09:47:35.130651Z	debug	envoy pool	[C855] assigning connection
+2021-07-27T09:47:35.130668Z	debug	envoy thrift	[C854] thrift filter continued
+2021-07-27T09:47:35.130671Z	debug	envoy thrift	thrift: 54 bytes available
+2021-07-27T09:47:35.130675Z	debug	envoy thrift	thrift: protocol binary(auto), state StructBegin, 54 bytes available
+2021-07-27T09:47:35.130813Z	debug	envoy thrift	thrift: unframed(auto) transport ended
+2021-07-27T09:47:35.132147Z	debug	envoy thrift	thrift: 136 bytes available
+2021-07-27T09:47:35.132162Z	debug	envoy thrift	thrift: unframed transport started
+2021-07-27T09:47:35.132167Z	debug	envoy thrift	thrift: protocol binary, state MessageBegin, 136 bytes available
+2021-07-27T09:47:35.132178Z	debug	envoy thrift	thrift: unframed transport ended
+2021-07-27T09:47:35.132192Z	debug	envoy thrift	[C854][S12916967057264934075] response complete
+2021-07-27T09:47:35.132203Z	debug	envoy pool	[C855] connection released
+2021-07-27T09:47:35.132207Z	debug	envoy pool	[C855] moving to ready
+2021-07-27T09:47:35.132942Z	debug	envoy thrift	thrift: 0 bytes available
+2021-07-27T09:47:35.132956Z	debug	envoy thrift	thrift: need more data for unframed(auto) transport start
+2021-07-27T09:47:35.132983Z	debug	envoy connection	[C854] closing data_to_write=0 type=0
+2021-07-27T09:47:35.132987Z	debug	envoy connection	[C854] closing socket: 1
+2021-07-27T09:47:35.133080Z	debug	envoy wasm	wasm log stats_outbound tcp_stats_outbound: [extensions/stats/plugin.cc:621]::report() metricKey cache hit , stat=28
+2021-07-27T09:47:35.133089Z	debug	envoy wasm	wasm log stats_outbound tcp_stats_outbound: [extensions/stats/plugin.cc:621]::report() metricKey cache hit , stat=32
+2021-07-27T09:47:35.133093Z	debug	envoy wasm	wasm log stats_outbound tcp_stats_outbound: [extensions/stats/plugin.cc:621]::report() metricKey cache hit , stat=36
+2021-07-27T09:47:35.133097Z	debug	envoy wasm	wasm log stats_outbound tcp_stats_outbound: [extensions/stats/plugin.cc:621]::report() metricKey cache hit , stat=40
+2021-07-27T09:47:35.133103Z	debug	envoy conn_handler	[C854] adding to cleanup list
+2021-07-27T09:47:35.746109Z	debug	envoy conn_handler	[C856] new connection
+2021-07-27T09:47:35.746349Z	debug	envoy http	[C856] new stream
+2021-07-27T09:47:35.753278Z	debug	envoy http	[C856][S1573760653242576551] request headers complete (end_stream=true):
+':authority', '10.39.0.2:15021'
+':path', '/healthz/ready'
+':method', 'GET'
+'user-agent', 'kube-probe/1.21'
+'accept', '*/*'
+'connection', 'close'
+
+2021-07-27T09:47:35.753312Z	debug	envoy http	[C856][S1573760653242576551] request end stream
+2021-07-27T09:47:35.753430Z	debug	envoy router	[C856][S1573760653242576551] cluster 'agent' match for URL '/healthz/ready'
+2021-07-27T09:47:35.753509Z	debug	envoy router	[C856][S1573760653242576551] router decoding headers:
+':authority', '10.39.0.2:15021'
+':path', '/healthz/ready'
+':method', 'GET'
+':scheme', 'http'
+'user-agent', 'kube-probe/1.21'
+'accept', '*/*'
+'x-forwarded-proto', 'http'
+'x-request-id', '01d8f873-1ff4-47b7-ab11-18a53033922b'
+'x-envoy-expected-rq-timeout-ms', '15000'
+
+2021-07-27T09:47:35.753535Z	debug	envoy pool	[C7] using existing connection
+2021-07-27T09:47:35.753545Z	debug	envoy pool	[C7] creating stream
+2021-07-27T09:47:35.753565Z	debug	envoy router	[C856][S1573760653242576551] pool ready
+2021-07-27T09:47:35.755710Z	debug	envoy client	[C7] response complete
+2021-07-27T09:47:35.755748Z	debug	envoy router	[C856][S1573760653242576551] upstream headers complete: end_stream=true
+2021-07-27T09:47:35.755851Z	debug	envoy http	[C856][S1573760653242576551] closing connection due to connection close header
+2021-07-27T09:47:35.755892Z	debug	envoy http	[C856][S1573760653242576551] encoding headers via codec (end_stream=true):
+':status', '200'
+'date', 'Tue, 27 Jul 2021 09:47:35 GMT'
+'content-length', '0'
+'x-envoy-upstream-service-time', '2'
+'server', 'envoy'
+'connection', 'close'
+
+2021-07-27T09:47:35.755949Z	debug	envoy connection	[C856] closing data_to_write=143 type=2
+2021-07-27T09:47:35.755967Z	debug	envoy connection	[C856] setting delayed close timer with timeout 1000 ms
+2021-07-27T09:47:35.755985Z	debug	envoy pool	[C7] response complete
+2021-07-27T09:47:35.755995Z	debug	envoy pool	[C7] destroying stream: 0 remaining
+2021-07-27T09:47:35.756160Z	debug	envoy connection	[C856] write flush complete
+2021-07-27T09:47:35.756452Z	debug	envoy connection	[C856] remote early close
+2021-07-27T09:47:35.756476Z	debug	envoy connection	[C856] closing socket: 0
+2021-07-27T09:47:35.756610Z	debug	envoy conn_handler	[C856] adding to cleanup list

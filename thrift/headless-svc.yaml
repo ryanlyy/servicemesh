@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: thrift-demo-server-headless
+  name: thrift-demo-server-headless
+spec:
+  clusterIP: "None"
+  ports:
+  - port: 9999
+    protocol: TCP
+    targetPort: 9999
+    # See https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/
+    # Setting protocol to tcp, so istio will place envoy.tcp_proxy at the end of the filter chain.
+    #name: tcp
+    name: tcp-demo-server-headless
+  selector:
+    app: thrift-demo-server
+

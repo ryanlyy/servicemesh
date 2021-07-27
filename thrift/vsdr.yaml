@@ -1,0 +1,26 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: dr-server
+spec:
+  host: thrift-demo-server.thrift-demo.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-server
+spec:
+  hosts:
+  - thrift-demo-server.thrift-demo.svc.cluster.local
+  tcp:
+    #- match:
+    #  - port: 10005
+    -  route:
+        - destination:
+            host: thrift-demo-server.thrift-demo.svc.cluster.local
+
