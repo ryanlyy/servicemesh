@@ -1,0 +1,144 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews-route
+spec:
+  hosts: #destination hosts to which traffic is being sent 
+  - reviews.prod.svc.cluster.local
+  gateways: 
+  - productpage #The names of gateways and sidecars that should apply these routes
+  http:
+  - name: "reviews-v2-routes"
+    match:
+    - uri:
+        prefix|exact|regex: "/wpcatalog"
+      schema:
+        prefix|exact|regex: <http schema>
+      method:
+        prefix|exact|regex: <http method>
+      authority:
+        prefix|exact|regex: <http authority>
+      headers:
+        end-user:
+          prefix|exact|regex: jason
+        h1:
+          prefix|exact|regex: hv1
+      port: 8080
+      sourceLabels: #plus spec.gateways to match pod traffic coming from
+        version: v1
+      queryParams:
+        key1: 
+          prefix|exact|regex: value1
+        key2: 
+          prefix|exact|regex: value2
+      ignoreUriCase: [true|false]
+    route:
+    - destination:
+        host: reviews.prod.svc.cluster.local
+        subset: v2
+        port: 
+          number: 8080
+      weight: 25
+      headers:  #can be manipulated when Envoy forwards requests to, or responses from, a destination service, override dest level headers
+        request:
+          set:
+            key: <value>
+          add: 
+            key: <value>
+          remove:
+          - foo
+        response:
+          set:
+            key: <value>
+          add: 
+            key: <value>
+          remove:
+          - foo
+    - destination:
+        host: reviews.prod.svc.cluster.local
+        subset: v1
+        port: 
+          number: 8080
+      weight: 75
+    redirect:  #http rule eigher redirect or foward; default(foraard, i.e: route) sending 301 redirect response to the caller
+      uri: /v1/bookRatings
+      authority: newratings.default.svc.cluster.local
+      redirectCode: 301 #default is 301
+    rewrite: #rewrite specific parts of a HTTP request before forwarding
+      uri: "/newcatalog"
+      authority: <new authority/Host header>
+    timeout: 5s
+    retries: 
+      attempts: 3 #number of retries for a given request
+      perTryTimeout: 1s
+      retryOn: <condition to retry, refer to envoy>
+    fault: #fault include abort and/or delaying
+      delay:
+        percentage:
+          value: 0.1
+        fixedDelay: 5s
+      abort:
+        percentage:
+          value: 0.1
+        httpStatus: 400
+    mirror:
+      host: reviews.prod.svc.cluster.local
+      subset: v2
+      port: 8080
+    mirrorPercent: 10 #default 100%
+    corsPolicy: #Cross-Origin Resource Sharing (CORS) policy
+      allowOrigin:
+      - example.com
+      allowMethods:
+      - POST
+      - GET
+      allowCredentials: false
+      allowHeaders:
+      - X-Foo-Bar
+      maxAge: "24h"
+      exposeHeaders:
+      - end_user
+      - X-Foo-Bar
+    headers: <desination level headers>
+  - name "reviews-v1-route"
+    rouote:
+    - destination:
+        host: reviews.prod.svc.cluster.local
+        subset: v1
+  tcp:
+  - match:
+    - port: 27017
+      destinationSubnets
+      - 10.0.0.0/24
+      sourceLabels: 
+        version: v1
+      gateways: #<gateway lists override top gateways>
+      - productpage
+    route:
+    - destination:
+        host: mongo.backup.svc.cluster.local
+        subset: v1
+        port:
+          number: 5555
+      weight: 100
+  tls:
+  - match:
+    - sniHosts: #<SNI: server name indicator to match on>
+      - sni1
+      destinationSubnets: 
+      - 10.0.1.0/24
+      port: 8080
+      sourceLabels:
+        version: v1
+      gateways: #<gateway list override top gateway>
+      - prductpage
+    route:
+    - destination:
+        host: mongo.backup.svc.cluster.local
+        subset: v1
+        port:
+          number: 5555
+      weight: 100
+  exportTo:
+  - ns1
+  - ns2

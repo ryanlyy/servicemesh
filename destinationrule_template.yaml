@@ -1,0 +1,73 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: drname
+spec:
+  host: dest-serice
+  trafficPolicy:
+    loadBalancer:
+      # policy can be one of simple and consistentHansh
+      # PASSTHROUGH: forward the connection to the original IP address requested by the caller
+      simple: [LEAST_CONN|ROUND_ROBIN|RANDOM|PASSTHROUGH]
+      consistentHash: 
+        #one of hash factor of t he following 3
+        #new dest added will lead to hash changed??? (envoy??)
+        httpHeaderName: <headname>
+        httpCookie: 
+          name: <cookiename>
+          path: <pathtocookie>
+          ttl: 0s
+        useSourceIp: [true|false]
+    connectionPool:
+      tcp:
+        maxConnections: 100 #default 2^32-1
+        connectTimeout: 30ms
+        tcpKeepalive:
+          probes: 9 #OS default is 9 
+          time: 7200s # OS default is 72000s
+          interval: 75s #OS default is 75s
+      http:
+        http1MaxPendingRequests: 1 #default 2^32-1
+        http2MaxRequests: 100 #default 2^32-1
+        maxRequestsPerConnection: 1 #default 2^29
+        maxRetries: 7 #default 2^32-1 
+        idleTimeout: 1s #The idle timeout is defined as the period in which there are no active requests
+        h2UpgradePolicy: [DEFAULT|DO_NOT_UPGRADE|UPGRADE] #Policy for upgrading http1.1 connections to http2
+    outlierDetection:
+      consecutiveErrors: 1 #default is 5
+      interval: 1s #default 10s
+      baseEjectionTime: 3m #default is 30s
+      maxEjectionPercent: 100 #default is 10%
+      minHealthPercent: 10 #default 0, if healthhost is lower then this threshold, outlier detection will be disabled
+    tls:
+      mode: [MUTUAL|DISABLE|SIMPLE|ISTIO_MUTUAL]
+      clientCertificate: /etc/certs/myclientcert.pem
+      privateKey: /etc/certs/client_private_key.pem
+      caCertificates: /etc/certs/rootcacerts.pem
+      subjectAltNames: #<A list of alternate names to verify the subject identity in the certificate> #If specified, the proxy will verify that the server certificate’s subject alt name matches one of the specified values
+      - NAMEA
+      - NAMEB
+      sni: <SNIstring>
+    portLevelSettings: #Traffic policies specific to individual ports; override detination level setting
+    - port:
+        number: 8080
+      loadBalancer: <LoadBalancerSettings>
+      connectionPool: <ConnectionPoolSettings>
+      outlierDetection: <OutlierDetection>
+      tls: <TLSSettings>
+  subsets:
+  - name: dest-service-v1
+    labels: #plus spec.host which means a set of endpoints
+      version: v1
+    trafficPolicy: <TrafficPolicy> #overfide service level traffic policy
+  - name: dest-service-v2
+    labels: #plus spec.host which means a set of endpoints
+      version: v2
+    trafficPolicy: <TrafficPolicy> #overfide service level traffic policy
+  - name: dest-service-v3
+    labels: #plus spec.host which means a set of endpoints
+      version: v3
+    trafficPolicy: <TrafficPolicy> #overfide service level traffic policy
+  exportTo: #<namespaces to which this destination rule is exported>
+  - ns1
+  - ns2
